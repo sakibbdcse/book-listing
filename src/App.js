@@ -1,17 +1,39 @@
+// src/App.js
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import BookList from "./components/BookList";
 import BookDetail from "./components/BookDetail";
-
-function App() {
+import Register from "./components/Register";
+import Login from "./components/Login";
+import Logout from "./components/Logout";
+import ProtectedRoute from "./components/ProtectedRoute";
+import "./global.css";
+const App = () => {
   return (
     <Router>
-      <Switch>
-        <Route exact path="/" component={BookList} />
-        <Route path="/book/:id" component={BookDetail} />
-      </Switch>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <BookList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/book/:id"
+          element={
+            <ProtectedRoute>
+              <BookDetail />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
+      </Routes>
     </Router>
   );
-}
+};
 
 export default App;
