@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -47,6 +47,9 @@ const Login = () => {
         />
         {error && <p className="error-message">{error}</p>}
         <button type="submit">Login</button>
+        <p>
+          <Link to="/register">Register here</Link>
+        </p>
       </form>
     </div>
   );

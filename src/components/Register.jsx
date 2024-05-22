@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -25,6 +25,9 @@ const Register = () => {
       <input type="text" name="username" onChange={handleChange} />
       <input type="password" name="password" onChange={handleChange} />
       <button type="submit">Register</button>
+      <p>
+        <Link to="/login">Login here</Link>
+      </p>
     </form>
   );
 };
