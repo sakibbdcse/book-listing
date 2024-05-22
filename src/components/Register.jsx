@@ -21,14 +21,16 @@ const Register = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" name="username" onChange={handleChange} />
-      <input type="password" name="password" onChange={handleChange} />
-      <button type="submit">Register</button>
-      <p>
-        <Link to="/login">Login here</Link>
-      </p>
-    </form>
+    <div className="container">
+      <form onSubmit={handleSubmit}>
+        <input type="text" placeholder="Enter Username" name="username" onChange={handleChange} />
+        <input type="password" placeholder="Enter password" name="password" onChange={handleChange} />
+        <button type="submit">Register</button>
+        <p>
+          <Link to="/login">Login here</Link>
+        </p>
+      </form>
+    </div>
   );
 };
 
