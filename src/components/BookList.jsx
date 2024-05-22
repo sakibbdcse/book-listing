@@ -1,39 +1,39 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./BookList.css"; // Import CSS file for styling
+import Logout from "./Logout";
 
 const BookList = () => {
-  const [books, setBooks] = useState([]);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
+  const [showBooks, setShowBooks] = useState([]);
 
   useEffect(() => {
-    fetchBooks(page);
-  }, [page]);
+    fetchBooks();
+  }, []);
 
-  const fetchBooks = async (page) => {
+  const fetchBooks = async () => {
     try {
-      const response = await axios.get(`/api/books?page=${page}`);
-      setBooks((prevBooks) => [...prevBooks, ...response.data.books]);
-      setHasMore(response.data.hasMore);
+      const response = await axios.get(`http://localhost:8000/api/books`);
+      setShowBooks(response.data);
+      console.log(response);
     } catch (error) {
       console.error("Error fetching books:", error);
     }
   };
 
-  const loadMoreBooks = () => {
-    setPage((prevPage) => prevPage + 1);
-  };
-
   return (
-    <div className="book-list">
-      {books.map((book) => (
+    <div className="book-list-container">
+      <Logout />
+      {showBooks.map((book) => (
         <div className="book-item" key={book.id}>
-          <img src={book.coverImage} alt={book.title} />
-          <h3>{book.title}</h3>
-          <p>{book.authors.join(", ")}</p>
+          <div className="book-image">
+            <img src={book.cover_image} alt={book.title} />
+          </div>
+          <div className="book-details">
+            <h3>{book.title}</h3>
+            {/* <p>{book.author}</p> */}
+          </div>
         </div>
       ))}
-      {hasMore && <button onClick={loadMoreBooks}>Load More</button>}
     </div>
   );
 };

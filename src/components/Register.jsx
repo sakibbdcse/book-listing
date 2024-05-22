@@ -13,7 +13,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/register", formData);
+      await axios.post("http://localhost:8000/api/register", formData); // Replace with your actual API endpoint URL
       navigate("/login");
     } catch (error) {
       console.error("Error registering:", error);
